@@ -14,17 +14,17 @@ html
 		script(src="assets/js/nouislider/nouislider.min.js")
 		script(src="assets/js/nouislider/wNumb.js")
 
-		script(src="/assets/js/ios-drag-drop.js" type="text/javascript" charset="utf-8")
+		script(src="assets/js/ios-drag-drop.js" type="text/javascript" charset="utf-8")
 
-		script(src="/assets/js/jquery.ui.touch-punch.min.js")
-		script(src='/assets/js/function.js')
+		script(src="assets/js/jquery.ui.touch-punch.min.js")
+		script(src='assets/js/function.js')
 
 	body
 		.main-container
 
 			.interactive
 				#person
-					img(src="/assets/img/sad.png", alt="Sad person")
+					img(src="assets/img/sad.png", alt="Sad person")
 				#drag
 
 			i(class="fa fa-user fa-5x icon" aria-hidden="true")
@@ -50,8 +50,7 @@ html
 				drop: function( event, ui ) {
 					console.log('Dropped');
 					$( this )
-					//- .addClass( "over" )
-					.attr("src", "/assets/img/happy.png");
+					.attr("src", "assets/img/happy.png");
 					$('#drag').css('display', 'none');
 				}
 			});

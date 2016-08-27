@@ -12,14 +12,14 @@
     <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
     <script src="assets/js/nouislider/nouislider.min.js"></script>
     <script src="assets/js/nouislider/wNumb.js"></script>
-    <script src="/assets/js/ios-drag-drop.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
-    <script src="/assets/js/function.js"></script>
+    <script src="assets/js/ios-drag-drop.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="assets/js/function.js"></script>
   </head>
   <body>
     <div class="main-container">
       <div class="interactive">
-        <div id="person"><img src="/assets/img/sad.png" alt="Sad person"/></div>
+        <div id="person"><img src="assets/img/sad.png" alt="Sad person"/></div>
         <div id="drag"></div>
       </div><i aria-hidden="true" class="fa fa-user fa-5x icon"></i>
       <div class="slider-bar">
@@ -38,8 +38,7 @@
       	drop: function( event, ui ) {
       		console.log('Dropped');
       		$( this )
-      		//- .addClass( "over" )
-      		.attr("src", "/assets/img/happy.png");
+      		.attr("src", "assets/img/happy.png");
       		$('#drag').css('display', 'none');
       	}
       });
