@@ -55,7 +55,7 @@ body {
   position: absolute;
   margin: -65px 0 0 5px;
   transform: rotate(45deg);
-  background-image: url("assets/img/pill.png");
+  background-image: url("/assets/img/pill.png");
 }
 
 .buttons {
@@ -134,7 +134,7 @@ body {
   border: none !important;
   border-radius: 50% !important;
   box-shadow: none !important;
-  background-image: url("assets/img/roller white.png") !important;
+  background-image: url("/assets/img/roller white.png") !important;
   background-repeat: no-repeat;
 }
 
