@@ -1,0 +1,65 @@
+
+<html>
+  <head>
+    <title>Presentation</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"/>
+    <link rel="stylesheet" href="assets/css/nouislider/nouislider.min.css"/>
+    <link rel="stylesheet" href="assets/css/nouislider/nouislider.tooltips.css"/>
+    <link rel="stylesheet" href="assets/css/style.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+    <script src="assets/js/nouislider/nouislider.min.js"></script>
+    <script src="assets/js/nouislider/wNumb.js"></script>
+    <script src="/assets/js/ios-drag-drop.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="/assets/js/function.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="interactive">
+        <div id="person"><img src="/assets/img/sad.png" alt="Sad person"/></div>
+        <div id="drag"></div>
+      </div><i aria-hidden="true" class="fa fa-user fa-5x icon"></i>
+      <div class="slider-bar">
+        <div id="slider-ui"></div>
+      </div><i aria-hidden="true" class="fa fa-clock-o fa-4x icon watch"></i>
+      <div class="buttons"><span class="buttons_btn-text">Количество пациентов</span>
+                <div class="buttons_btn"><a href="#" onclick="void(0)" id="buttons_btn1" title="день">день</a></div>
+                <div class="buttons_btn"><a href="#" onclick="void(0)" id="buttons_btn2" title="неделя">неделя</a></div>
+                <div class="buttons_btn"><a href="#" onclick="void(0)" id="buttons_btn3" title="месяц">месяц</a></div><span class="buttons_btn-text after-btn">за период</span>
+      </div>
+    </div>
+    <script>
+      $('#drag').draggable({ revert: "invalid" });
+      
+      $( "#person img" ).droppable({
+      	drop: function( event, ui ) {
+      		console.log('Dropped');
+      		$( this )
+      		//- .addClass( "over" )
+      		.attr("src", "/assets/img/happy.png");
+      		$('#drag').css('display', 'none');
+      	}
+      });
+      
+      
+      
+    </script>
+    <script>
+      var slider = document.getElementById('slider-ui');
+      
+      noUiSlider.create(slider, {
+      	start: 1,
+      	step: 1,
+      	tooltips: wNumb({ decimals: 0 }),
+      	connect: 'lower',
+      	range: {
+      		'min': 1,
+      		'max': 21
+      	}
+      });
+    </script>
+  </body>
+</html>

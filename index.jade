@@ -1,0 +1,76 @@
+html
+	head
+		title Presentation
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0")
+		link(rel="stylesheet", href="assets/css/nouislider/nouislider.min.css")
+		link(rel="stylesheet", href="assets/css/nouislider/nouislider.tooltips.css")
+		link(rel="stylesheet", href="assets/css/style.css")
+		link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
+
+		script(src="http://code.jquery.com/jquery-1.7.2.min.js")
+		script(src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js")
+
+		script(src="assets/js/nouislider/nouislider.min.js")
+		script(src="assets/js/nouislider/wNumb.js")
+
+		script(src="/assets/js/ios-drag-drop.js" type="text/javascript" charset="utf-8")
+
+		script(src="/assets/js/jquery.ui.touch-punch.min.js")
+		script(src='/assets/js/function.js')
+
+	body
+		.main-container
+
+			.interactive
+				#person
+					img(src="/assets/img/sad.png", alt="Sad person")
+				#drag
+
+			i(class="fa fa-user fa-5x icon" aria-hidden="true")
+			.slider-bar
+				#slider-ui
+
+			i(class="fa fa-clock-o fa-4x icon watch" aria-hidden="true")
+			.buttons
+				span.buttons_btn-text Количество пациентов
+				-var buttonList = [{text: 'день', order: 1}, {text: 'неделя', order: 2}, {text: 'месяц', order: 3}];
+					mixin button-draw(button)
+						div(class='buttons_btn')
+							a(href="#" onclick='void(0)' id='buttons_btn'+button.order+'' title= button.text)=button.text
+
+				for btn in buttonList
+					+button-draw(btn)
+				span.buttons_btn-text.after-btn за период
+
+		script.
+			$('#drag').draggable({ revert: "invalid" });
+
+			$( "#person img" ).droppable({
+				drop: function( event, ui ) {
+					console.log('Dropped');
+					$( this )
+					//- .addClass( "over" )
+					.attr("src", "/assets/img/happy.png");
+					$('#drag').css('display', 'none');
+				}
+			});
+
+
+
+		script.
+			var slider = document.getElementById('slider-ui');
+
+			noUiSlider.create(slider, {
+				start: 1,
+				step: 1,
+				tooltips: wNumb({ decimals: 0 }),
+				connect: 'lower',
+				range: {
+					'min': 1,
+					'max': 21
+				}
+			});
+
+
+
