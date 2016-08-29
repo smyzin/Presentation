@@ -3,6 +3,8 @@ html
 		title Presentation
 		meta(charset="utf-8")
 		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0")
+		link(rel="stylesheet" href="assets/css/reveal.css")
+		link(rel="stylesheet" href="assets/css/theme/white.css")
 		link(rel="stylesheet", href="assets/css/nouislider/nouislider.min.css")
 		link(rel="stylesheet", href="assets/css/nouislider/nouislider.tooltips.css")
 		link(rel="stylesheet", href="assets/css/style.css")
@@ -18,43 +20,103 @@ html
 		script(src='assets/js/function.js')
 
 	body
-		.main-container
+		//- .main-container
+		.reveal
+			.slides(style="transform: translate(-50%, -50%) scale(0.45) !important;")
+				section
+					.interactive
+						.person
+							img(src="assets/img/sad.png", alt="Sad person")
+						#drag
 
-			.interactive
-				#person
-					img(src="assets/img/sad.png", alt="Sad person")
-				#drag
+					i(class="fa fa-user fa-4x icon" aria-hidden="true")
+					.slider-bar
+						#slider-ui
 
-			i(class="fa fa-user fa-5x icon" aria-hidden="true")
-			.slider-bar
-				#slider-ui
+					i(class="fa fa-clock-o fa-4x icon watch" aria-hidden="true")
+					.buttons
+						span.buttons_btn-text Количество пациентов
+						-var buttonList = [{text: 'день', order: 1}, {text: 'неделя', order: 2}, {text: 'месяц', order: 3}];
+							mixin button-draw(button)
+								div(class='buttons_btn')
+									a(href="#" id='buttons_btn'+button.order+'' title= button.text)=button.text
 
-			i(class="fa fa-clock-o fa-4x icon watch" aria-hidden="true")
-			.buttons
-				span.buttons_btn-text Количество пациентов
-				-var buttonList = [{text: 'день', order: 1}, {text: 'неделя', order: 2}, {text: 'месяц', order: 3}];
-					mixin button-draw(button)
-						div(class='buttons_btn')
-							a(href="#" onclick='void(0)' id='buttons_btn'+button.order+'' title= button.text)=button.text
+						for btn in buttonList
+							+button-draw(btn)
+						span.buttons_btn-text.after-btn за период
+				section
+					.cover
+					.interactive
+						.person
+							img(src="assets/img/sad.png", alt="Sad person" id='person-img')
+						#drag2
 
-				for btn in buttonList
-					+button-draw(btn)
-				span.buttons_btn-text.after-btn за период
+					i(class="fa fa-user fa-4x icon" aria-hidden="true")
+					.slider-bar
+						#slider-ui2
 
+					i(class="fa fa-clock-o fa-4x icon watch" aria-hidden="true")
+					.buttons
+						span.buttons_btn-text Количество пациентов
+						-var buttonList = [{text: 'день', order: 1}, {text: 'неделя', order: 2}, {text: 'месяц', order: 3}];
+							mixin button-draw(button)
+								div(class='buttons_btn')
+									a(href="#" id='buttons_btn'+button.order+'2' title= button.text)=button.text
+
+						for btn in buttonList
+							+button-draw(btn)
+						span.buttons_btn-text.after-btn за период
+
+
+		script(src="assets/js/reveal.js")
 		script.
-			$('#drag').draggable({ revert: "invalid" });
-
-			$( "#person img" ).droppable({
-				drop: function( event, ui ) {
-					console.log('Dropped');
-					$( this )
-					.attr("src", "assets/img/happy.png");
-					$('#drag').css('display', 'none');
+			//- Drag/Drop start
+			$('#drag').draggable({
+				revert: "valid",
+				//- start: function(event, ui) {
+					//- var leftSt = ui.position.left + 25;
+					//- var topSt = ui.position.top + 104;
+					//- ui.position.left = leftSt;
+					//- ui.position.top = topSt;
+				//- },
+				drag: function( event, ui ) {
+					var leftSt = ui.position.left + 25;
+					var topSt = ui.position.top + 104;
+					ui.position.left = leftSt;
+					ui.position.top = topSt;
+					$('#drag2').css({
+						'left': ui.position.left,
+						'top': ui.position.top
+					});
 				}
 			});
 
+			$( ".person img" ).droppable({
+				drop: function( event, ui ) {
+					$( this ).attr("src", "assets/img/happy.png");
+					$('#drag, #drag2').css('display', 'none').addClass('dropped');
+					$( "#person-img" ).attr('src', 'assets/img/happy.png');
+				}
+			});
+			//- Drag/Drop end
+
 		script.
+			//- Init slides
+			Reveal.initialize({
+				controls: true,
+				slideNumber: true,
+				touch: false,
+				//- hideAddressBar: true,
+				transition: 'slide'
+			});
+			//- Create slides start
 			var slider = document.getElementById('slider-ui');
+			var slider2 = document.getElementById('slider-ui2');
+			var sliderStart;
+
+			//- document.getElementById('slider-ui').addEventListener('click', function(){
+			//- 	slider2.noUiSlider.set(slider.noUiSlider.get());
+			//- });
 
 			noUiSlider.create(slider, {
 				start: 1,
@@ -66,6 +128,24 @@ html
 					'max': 21
 				}
 			});
+
+			slider.noUiSlider.on('change', function(){
+				console.log(slider.noUiSlider.get());
+				slider2.noUiSlider.set(slider.noUiSlider.get());
+			});
+
+			noUiSlider.create(slider2, {
+				start: 1,
+				step: 1,
+				tooltips: wNumb({ decimals: 0 }),
+				connect: 'lower',
+				range: {
+					'min': 1,
+					'max': 21
+				}
+			});
+			//- Create slides end
+
 
 
 

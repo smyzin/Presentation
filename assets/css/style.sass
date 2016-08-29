@@ -25,27 +25,34 @@ body
 	min-height: 1024px
 	padding-top: 35px
 
+.reveal
+	.slides section
+		margin-bottom: 35px !important
+
 .interactive
 	width: 80%
 	height: 440px
 	margin: 0 auto
 
-#person
+.cover
+	position: absolute
+	z-index: 50
+	width: 100%
+	height: 100%
+
+.person
 	text-align: center
 	& img
 		width: auto
 		height: 440px
 
-.over
-	background: rgba(0, 0, 0, .2)
-
-#drag
+#drag, #drag2
 	width: 78px
 	height: 34px
 	position: absolute
-	margin: -65px 0 0 5px
+	margin: -65px 0 0 5px !important
 	transform: rotate(45deg)
-	background-image: url('https://github.com/smyzin/presentation/blob/master/assets/img/pill.png?raw=true')
+	background-image: url('/../assets/img/pill.png')
 
 .buttons
 	position: relative
@@ -64,7 +71,7 @@ body
 	padding: 14px 35px
 	border: 3px solid #1B3B5C
 	border-radius: 10px
-	font-size: 25px
+	font-size: 25px !important
 	font-family: sans-serif
 	font-weight: 600
 	margin: 0 5px
@@ -76,14 +83,16 @@ body
 	&:focus
 		box-shadow: inset 2px 2px 7px rgba(0, 0, 0, .5)
 
+.pressed
+	box-shadow: inset 2px 2px 7px rgba(0, 0, 0, .5)
 
 .icon
 	position: absolute
-	margin-left: 55px
+	margin-left: 45px
 	color: white
 
 .watch
-	margin-left: 160px
+	margin-left: 120px
 	margin-top: 65px
 
 .buttons_btn-text
@@ -91,7 +100,7 @@ body
 	margin-top: 10px
 	color: white
 	font-weight: 600
-	font-size: 28px
+	font-size: 28px !important
 	font-family: sans-serif
 
 .after-btn
@@ -112,7 +121,7 @@ body
 	border: none !important
 	border-radius: 50% !important
 	box-shadow: none !important
-	background-image: url('https://github.com/smyzin/presentation/blob/master/assets/img/roller%20white.png?raw=true') !important
+	background-image: url('/../assets/img/roller white.png') !important
 	background-repeat: no-repeat
 	&:after, &:before
 		background: transparent !important
@@ -132,7 +141,7 @@ body
 	border-radius: 20px !important
 
 .noUi-tooltip
-	font-size: 27px
+	font-size: 27px !important
 	top: -45px !important
 	left: 22px !important
 	background: #E00212 !important
