@@ -4,6 +4,8 @@
     <title>Presentation</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0"/>
+    <link rel="stylesheet" href="assets/css/reveal.css"/>
+    <link rel="stylesheet" href="assets/css/theme/white.css"/>
     <link rel="stylesheet" href="assets/css/nouislider/nouislider.min.css"/>
     <link rel="stylesheet" href="assets/css/nouislider/nouislider.tooltips.css"/>
     <link rel="stylesheet" href="assets/css/style.css"/>
@@ -16,35 +18,89 @@
     <script src="assets/js/function.js"></script>
   </head>
   <body>
-    <div class="main-container">
-      <div class="interactive">
-        <div id="person"><img src="assets/img/sad.png" alt="Sad person"/></div>
-        <div id="drag"></div>
-      </div><i aria-hidden="true" class="fa fa-user fa-5x icon"></i>
-      <div class="slider-bar">
-        <div id="slider-ui"></div>
-      </div><i aria-hidden="true" class="fa fa-clock-o fa-4x icon watch"></i>
-      <div class="buttons"><span class="buttons_btn-text">Количество пациентов</span>
-                <div class="buttons_btn"><a href="#" onclick="void(0)" id="buttons_btn1" title="день">день</a></div>
-                <div class="buttons_btn"><a href="#" onclick="void(0)" id="buttons_btn2" title="неделя">неделя</a></div>
-                <div class="buttons_btn"><a href="#" onclick="void(0)" id="buttons_btn3" title="месяц">месяц</a></div><span class="buttons_btn-text after-btn">за период</span>
+    <div class="reveal">
+      <div style="transform: translate(-50%, -50%) scale(0.45) !important;" class="slides">
+        <section>
+          <div class="interactive">
+            <div class="person"><img src="assets/img/sad.png" alt="Sad person"/></div>
+            <div id="drag"></div>
+          </div><i aria-hidden="true" class="fa fa-user fa-4x icon"></i>
+          <div class="slider-bar">
+            <div id="slider-ui"></div>
+          </div><i aria-hidden="true" class="fa fa-clock-o fa-4x icon watch"></i>
+          <div class="buttons"><span class="buttons_btn-text">Количество пациентов</span>
+                        <div class="buttons_btn"><a href="#" id="buttons_btn1" title="день">день</a></div>
+                        <div class="buttons_btn"><a href="#" id="buttons_btn2" title="неделя">неделя</a></div>
+                        <div class="buttons_btn"><a href="#" id="buttons_btn3" title="месяц">месяц</a></div><span class="buttons_btn-text after-btn">за период</span>
+          </div>
+        </section>
+        <section>
+          <div class="cover"></div>
+          <div class="interactive">
+            <div class="person"><img src="assets/img/sad.png" alt="Sad person" id="person-img"/></div>
+            <div id="drag2"></div>
+          </div><i aria-hidden="true" class="fa fa-user fa-4x icon"></i>
+          <div class="slider-bar">
+            <div id="slider-ui2"></div>
+          </div><i aria-hidden="true" class="fa fa-clock-o fa-4x icon watch"></i>
+          <div class="buttons"><span class="buttons_btn-text">Количество пациентов</span>
+                        <div class="buttons_btn"><a href="#" id="buttons_btn12" title="день">день</a></div>
+                        <div class="buttons_btn"><a href="#" id="buttons_btn22" title="неделя">неделя</a></div>
+                        <div class="buttons_btn"><a href="#" id="buttons_btn32" title="месяц">месяц</a></div><span class="buttons_btn-text after-btn">за период</span>
+          </div>
+        </section>
       </div>
     </div>
+    <script src="assets/js/reveal.js"></script>
     <script>
-      $('#drag').draggable({ revert: "invalid" });
-      
-      $( "#person img" ).droppable({
-      	drop: function( event, ui ) {
-      		console.log('Dropped');
-      		$( this )
-      		.attr("src", "assets/img/happy.png");
-      		$('#drag').css('display', 'none');
+      //- Drag/Drop start
+      $('#drag').draggable({
+      	revert: "valid",
+      	//- start: function(event, ui) {
+      		//- var leftSt = ui.position.left + 25;
+      		//- var topSt = ui.position.top + 104;
+      		//- ui.position.left = leftSt;
+      		//- ui.position.top = topSt;
+      	//- },
+      	drag: function( event, ui ) {
+      		var leftSt = ui.position.left + 25;
+      		var topSt = ui.position.top + 104;
+      		ui.position.left = leftSt;
+      		ui.position.top = topSt;
+      		$('#drag2').css({
+      			'left': ui.position.left,
+      			'top': ui.position.top
+      		});
       	}
       });
       
+      $( ".person img" ).droppable({
+      	drop: function( event, ui ) {
+      		$( this ).attr("src", "assets/img/happy.png");
+      		$('#drag, #drag2').css('display', 'none').addClass('dropped');
+      		$( "#person-img" ).attr('src', 'assets/img/happy.png');
+      	}
+      });
+      //- Drag/Drop end
+      
     </script>
     <script>
+      //- Init slides
+      Reveal.initialize({
+      	controls: true,
+      	slideNumber: true,
+      	touch: false,
+      	//- hideAddressBar: true,
+      	transition: 'slide'
+      });
+      //- Create slides start
       var slider = document.getElementById('slider-ui');
+      var slider2 = document.getElementById('slider-ui2');
+      var sliderStart;
+      
+      //- document.getElementById('slider-ui').addEventListener('click', function(){
+      //- 	slider2.noUiSlider.set(slider.noUiSlider.get());
+      //- });
       
       noUiSlider.create(slider, {
       	start: 1,
@@ -56,6 +112,23 @@
       		'max': 21
       	}
       });
+      
+      slider.noUiSlider.on('change', function(){
+      	console.log(slider.noUiSlider.get());
+      	slider2.noUiSlider.set(slider.noUiSlider.get());
+      });
+      
+      noUiSlider.create(slider2, {
+      	start: 1,
+      	step: 1,
+      	tooltips: wNumb({ decimals: 0 }),
+      	connect: 'lower',
+      	range: {
+      		'min': 1,
+      		'max': 21
+      	}
+      });
+      //- Create slides end
     </script>
   </body>
 </html>
